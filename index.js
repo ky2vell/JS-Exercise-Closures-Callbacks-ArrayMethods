@@ -132,8 +132,8 @@ function processProduct(num1, num2, callback) {
  * [2] Invoking `processDuplicateFree` passing `[1,1,2,2,3]` and `(arr) => arr.length`,
  * should return 3.
 */
-function processDuplicateFree(/* CODE HERE ONLY AFTER COMPLETING ALL OTHER TASKS */) {
-  /* CODE HERE ONLY AFTER COMPLETING ALL OTHER TASKS */
+function processDuplicateFree(list, callback) {
+  return callback(list.filter((item, index) => list.indexOf(item) === index));
 }
 
 /////////////// HIGHER-ORDER ARRAY METHODS ///////////////
@@ -179,8 +179,7 @@ function lowerCaseStrings(strings) {
  * [2] Invoking `isItAnApple` with `['a', 'b', 'c' ]` will return `[ false, false, false ]`.
 */
 function isItAnApple(strings) {
-  const apple = strings.map(item => item === 'apple' ? true : false);
-  return apple;
+  return strings.map(item => item === 'apple' ? true : false);
 }
 
 /**
@@ -200,8 +199,7 @@ function isItAnApple(strings) {
  * [2] Invoking `removeApple` with `['a', 'b', 'c' ]` will return `[ 'a', 'b', 'c' ]`.
 */
 function removeApple(strings) {
-  const applesGone = strings.filter(item => item != 'apple');
-  return applesGone;
+  return strings.filter(item => item != 'apple');
 }
 
 /**
@@ -220,8 +218,7 @@ function removeApple(strings) {
  * [2] Invoking `stringSmash` with `['a', 'b', 'c' ]` will return `abc`.
 */
 function stringSmash(strings) {
-  const smushed = strings.reduce((a, b) => a + b);
-  return smushed;
+  return strings.reduce((a, b) => a + b);
 }
 
 // A local community center is holding a fund raising 5k fun run and has invited
@@ -240,8 +237,7 @@ function stringSmash(strings) {
  * The full names appear in the array in the same order the runners appear in the `runners` array.
 */
 function getFullNames(runners) {
-  const getNames = runners.map(item => `${item.last_name}, ${item.first_name}`)
-  return getNames;
+  return runners.map(item => `${item.last_name}, ${item.first_name}`)
 }
 
 /**
@@ -257,8 +253,7 @@ function getFullNames(runners) {
  * The first names appear in the array in the same order the runners appear in the `runners` array.
 */
 function firstNamesAllCaps(runners) {
-  const newArray = runners.map(item => item.first_name.toUpperCase());
-  return newArray;
+  return runners.map(item => item.first_name.toUpperCase());
 }
 
 /**
@@ -276,11 +271,14 @@ function firstNamesAllCaps(runners) {
  * The runners in the array appear in the same order they appear in the `runners` array.
 */
 function getRunnersByTShirtSize(runners, tShirtSize) {
-  const newArray = runners.filter(item => item.shirt_size = tShirtSize);
+  const newArray = [];
+  runners.filter(function (runner) {
+    if (runner.shirt_size === tShirtSize) {
+      newArray.push(runner);
+    }
+  });
   return newArray;
 }
-
-console.log(getRunnersByTShirtSize);
 
 /**
  * ### Challenge `tallyUpDonations`
@@ -293,8 +291,8 @@ console.log(getRunnersByTShirtSize);
  * @param runners array of runners like the one inside the /data/runners.js file.
  * @returns a number which is the sum of the donations by all runners.
 */
-function tallyUpDonations(/* CODE HERE */) {
-  /* CODE HERE */
+function tallyUpDonations(runners) {
+  return runners.reduce((total, runner) => total + runner.donation, 0);
 }
 
 /////////////// CLOSURES ///////////////
@@ -308,9 +306,16 @@ function tallyUpDonations(/* CODE HERE */) {
  * 
  * 1. What is the difference between counter1 and counter2?
  * 
+ * counter1 stores the values of its variables locally, counter2 does not.
+ * 
  * 2. Which of the two uses a closure? How can you tell?
  * 
+ * counter1, it stores its variables locally.
+ * 
  * 3. In what scenario would the counter1 code be preferable? In what scenario would counter2 be better? 
+ * 
+ * counter1: a program that runs multiple times and requires memory.  
+ * counter2: a program that runs once.
  *
 */
 
@@ -352,8 +357,11 @@ function counter2() {
  * counter() // should return 0
  * etc
 */
-function counterMakerWithLimit(/* CODE HERE */) {
-  /* CODE HERE */
+function counterMakerWithLimit() {
+  count = 0;
+  return function () {
+    return count++;
+  }
 }
 
 /////////////// END OF CHALLENGE ///////////////
